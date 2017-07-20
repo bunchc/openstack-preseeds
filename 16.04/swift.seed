@@ -1,5 +1,5 @@
 #
-# Ubuntu Server 16.04 Preseed
+# Ubuntu Server 14.04 Preseed
 #
 # Usage:
 #
@@ -14,7 +14,7 @@
 #
 # References:
 #
-# https://help.ubuntu.com/16.04/installation-guide/example-preseed.txt
+# https://help.ubuntu.com/14.04/installation-guide/example-preseed.txt
 # http://www.claudiokuenzler.com/blog/513/debian-ubuntu-preseed-create-two-volume-groups-same-disk
 
 #############
@@ -138,7 +138,7 @@ d-i partman-auto/expert_recipe string \
                       label{ root }                           \
                       mountpoint{ / }                         \
               .                                               \
-              102400 1 102400 ext4                              \
+              102400 1 102400 ext4                            \
                       $lvmok{ } in_vg{ lxc }                  \
                       lv_name{ openstack00 }                  \
                       method{ format } format{ }              \
@@ -146,21 +146,13 @@ d-i partman-auto/expert_recipe string \
                       label{ openstack00 }                    \
                       mountpoint{ /openstack }                \
               .                                               \
-              20480 1 20480 ext4                              \
+              1024 1 1000000000 ext4                          \
                       $lvmok{ } in_vg{ lxc }                  \
-                      lv_name{ deleteme }                   \
+                      lv_name{ deleteme }                     \
                       method{ format } format{ }              \
                       use_filesystem{ } filesystem{ ext4 }    \
                       label{ deleteme }                     \
                       mountpoint{ /deleteme }                 \
-              .                                               \
-              1024 1 1000000000 ext4                          \
-                      $lvmok{ } in_vg{ lxc }                  \
-                      lv_name{ nova00 }                       \
-                      method{ format } format{ }              \
-                      use_filesystem{ } filesystem{ ext4 }    \
-                      label{ nova }                           \
-                      mountpoint{ /var/lib/nova }             \
               .                                               \
 
 # This makes partman automatically partition without confirmation, provided
